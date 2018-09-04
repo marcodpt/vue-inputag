@@ -20392,6 +20392,28 @@ module.exports = {
       default: function _default(x) {
         return x;
       }
+    },
+    dependencies: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    options: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    source: {
+      type: Function,
+      default: function _default(model, callback) {
+        callback(this.options);
+      }
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -20416,7 +20438,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.type === 'select')?_c('v-select',_vm._b({attrs:{"model":_vm.model,"id":_vm.id}},'v-select',_vm.$attrs,false)):(_vm.type === 'textarea')?_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.model[_vm.id]),expression:"model[id]"}],attrs:{"id":_vm.id,"rows":_vm.$attrs.rows > 0 ? _vm.$attrs.rows : 6},domProps:{"value":(_vm.model[_vm.id])},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.model, _vm.id, $event.target.value)}}}):(_vm.type === 'file')?_c('input',{attrs:{"type":"file","id":_vm.id},on:{"change":function($event){_vm.change($event.target.name, $event.target.files)}}}):(_vm.type === 'progressbar')?_c('div',{style:({
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.type === 'select')?_c('v-select',_vm._b({attrs:{"model":_vm.model,"id":_vm.id,"dependencies":_vm.dependencies,"options":_vm.options,"source":_vm.source,"required":_vm.required}},'v-select',_vm.$attrs,false)):(_vm.type === 'textarea')?_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.model[_vm.id]),expression:"model[id]"}],attrs:{"id":_vm.id,"rows":_vm.$attrs.rows > 0 ? _vm.$attrs.rows : 6},domProps:{"value":(_vm.model[_vm.id])},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.model, _vm.id, $event.target.value)}}}):(_vm.type === 'file')?_c('input',{attrs:{"type":"file","id":_vm.id},on:{"change":function($event){_vm.change($event.target.name, $event.target.files)}}}):(_vm.type === 'progressbar')?_c('div',{style:({
     width: '600px',
     'border-radius': '5px',
     'background-color': 'lightgrey'

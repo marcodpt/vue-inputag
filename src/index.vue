@@ -20,9 +20,25 @@
       },
       formatter: {
         type: Function,
-        default: function (x) {
-          return x
+        default: x => x
+      },
+      dependencies: {
+        type: Array,
+        default: () => []
+      },
+      options: {
+        type: Array,
+        default: () => []
+      },
+      source: {
+        type: Function,
+        default: function (model, callback) {
+          callback(this.options)
         }
+      },
+      required: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -50,6 +66,10 @@
     v-if="type === 'select'"
     :model="model"
     :id="id"
+    :dependencies="dependencies"
+    :options="options"
+    :source="source"
+    :required="required"
     v-bind="$attrs"
   />
   <textarea
