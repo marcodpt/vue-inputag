@@ -1,6 +1,6 @@
 {
   "name": "vue-inputag",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "All html inputs in a single vue component",
   "main": "src/index.vue",
   "repository": {
