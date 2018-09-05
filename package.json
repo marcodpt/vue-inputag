@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "libt": "0.0.3",
-    "vue-select": "^2.4.0"
+    "vue-select": "2.4.0"
   },
   "browserify": {
     "transform": [

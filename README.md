@@ -25,8 +25,11 @@ npm install --save vue-inputag
         text: 'This is a sample text\nEdit as many times as you want',
         scientist: 'Gauss',
         country: 2,
-        file: null
+        file: null,
+        msg: 'hello world!',
+        button: 'alert!'
       },
+      click: (data) => {window.alert(data.msg)},
       github: 'https://github.com/marcodpt/vue-inputag',
       options: [
         "Eistein",
@@ -62,6 +65,18 @@ npm install --save vue-inputag
     </div>
   </div>
   <div style="margin:20px">
+    <label>Button: <vue-inputag :click="click" :model="model" id="button" type=""/></label> 
+    <div>
+      <vue-inputag :model="model" id="msg"/>
+    </div>
+  </div>
+  <div style="margin:20px">
+    <label>Text: <vue-inputag :model="model" id="text" type=""/></label> 
+    <div>
+      <vue-inputag :model="model" id="text" type="textarea"/>
+    </div>
+  </div>
+  <div style="margin:20px">
     <label>Number: <vue-inputag :model="model" id="number" type=""/></label> 
     <div>
       <vue-inputag :model="model" id="number" type="number"/>
@@ -80,7 +95,7 @@ npm install --save vue-inputag
     </div>
   </div>
   <div style="margin:20px">
-    <label>Progress: <vue-inputag :model="model" id="integer" type="progressbar"/></label> 
+    <label>Progress: <vue-inputag :model="model" id="integer" type="progressbar" style="width:250px"/></label> 
     <div>
       <vue-inputag :model="model" id="integer" type="range"/>
     </div>
@@ -111,11 +126,19 @@ npm install --save vue-inputag
  - type
    - type: String
    - default: "text"
-   - description: Any input type from html5 + select + textarea + progressbar + pass blank type to static string
+   - description: Any input type from html5 + select + textarea + progressbar + pass blank type to static string or with an href become a link or with click become a button
  - formatter
    - type: Function
    - default: x => x
    - description: Function to format model[id] in case of type of input is blank
+ - click
+   - type: Function
+   - default: undefined
+   - description: in case of type is blank string and function passed it will render button
+ - href
+   - type: String
+   - default: ""
+   - description: in case of type is blank string and href passed it will render link, you can use :variable and it will render correct based on model
  - dependencies
    - type: Array
    - default: []
@@ -138,6 +161,13 @@ npm install --save vue-inputag
   All other props are bypassed to html element, even styles and classes  
   You should obseve that we use vue-select in case of select and only in this case  
   it is better not pass any style or class 
+
+### Slot
+  When type is a blank string it will render: 
+   - a button if has a click function 
+   - a link if has a href
+   - span otherwise
+   - all 3 cases admit slot, all other cases not
 
 ## Contribute
 We need help! Our goals are:

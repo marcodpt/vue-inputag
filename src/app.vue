@@ -15,8 +15,11 @@
         text: 'This is a sample text\nEdit as many times as you want',
         scientist: 'Gauss',
         country: 2,
-        file: null
+        file: null,
+        msg: 'hello world!',
+        button: 'alert!'
       },
+      click: (data) => {window.alert(data.msg)},
       github: 'https://github.com/marcodpt/vue-inputag',
       options: [
         "Eistein",

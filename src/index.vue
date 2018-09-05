@@ -26,6 +26,13 @@
         type: Array,
         default: () => []
       },
+      click: {
+        type: Function
+      },
+      href: {
+        type: String,
+        default: ''
+      },
       options: {
         type: Array,
         default: () => []
@@ -56,6 +63,20 @@
         value = value > 100 ? 100 : value
 
         return `hsl(${(100 - value) / 100 * 240}, 100%, ${value / 4 + 25}%)`
+      },
+      onClick: function () {
+        if (this.click) {
+          this.click(this.model)
+        }
+      },
+      parseHref: function (href) {
+        Object.keys(this.model).sort().reverse().forEach(key => {
+          while (href.indexOf(`:${key}`) !== -1 && this.model[key] != null) {
+            href = href.replace(`:${key}`, this.model[key])
+          }
+        })
+
+        return href
       }
     }
   }
@@ -76,7 +97,6 @@
     v-else-if="type === 'textarea'"
     v-model="model[id]"
     :id="id"
-    :rows="$attrs.rows > 0 ? $attrs.rows : 6"
   />
   <input 
     v-else-if="type === 'file'"
@@ -85,7 +105,7 @@
     @change="change($event.target.name, $event.target.files)"
   />
   <div v-else-if="type === 'progressbar'" :style="{
-      width: '600px',
+      'min-width': '100px',
       'border-radius': '5px',
       'background-color': 'lightgrey'
     }"
@@ -109,6 +129,11 @@
     :id="id"
     v-model="model[id]"
   />
-  <a v-else-if="$attrs.href" :style="getStyle()" target="_blank">{{formatter(model[id])}}</a>
-  <span v-else :style="getStyle()">{{formatter(model[id])}}</span>
+  <button v-else-if="click" @click="onClick"><slot></slot>{{formatter(model[id])}}</button>
+  <a v-else-if="href"
+    :href="parseHref(href)"
+    :style="getStyle()"
+    target="_blank"
+  ><slot></slot>{{formatter(model[id])}}</a>
+  <span v-else :style="getStyle()"><slot></slot>{{formatter(model[id])}}</span>
 </template>
