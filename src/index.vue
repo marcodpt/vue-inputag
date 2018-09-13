@@ -54,7 +54,7 @@
       },
       getStyle: function () {
         return {
-          'white-space': String(this.model[this.id]).match(/\n/) ? 'pre-line' : null
+          'white-space': String(this.model[this.id]).match(/\n/) ? 'pre-wrap' : null
         }
       },
       getBarColor: function () {
